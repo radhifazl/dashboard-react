@@ -2,14 +2,15 @@ import React from 'react'
 import DashboardSidebar from './Sidebar'
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BiSolidBell } from 'react-icons/bi';
+import { useState } from 'react';
 
-const Header = () => {
+const Header = ({onClick}) => {
     return (
       <div className={`
         header py-2 rounded-xl px-5 w-full lg:flex justify-between items-center bg-base-component mb-3 
       `}>
         <div className="header-title flex items-center gap-5 max-md:justify-between max-md:mb-5">
-            <div className="hamburger cursor-pointer hover:text-primary-blue transition">
+            <div className="hamburger cursor-pointer hover:text-primary-blue transition" onClick={onClick}>
                 <GiHamburgerMenu size={20}/>
             </div>
             <h1 className='uppercase max-md:text-sm max-sm:text-xs '>Digitalization Line Production</h1>
@@ -38,11 +39,17 @@ const Footer = () => {
 }
 
 const DashboardWrapper = ({ children }) => {
+  const [expand, setExpand] = useState(false)
+
+  const expandSidebar = () => {
+    setExpand(!expand)
+  }
+
   return (
     <div className='w-full h-full flex items-start'>
-        <DashboardSidebar />
+        <DashboardSidebar isExpanded={expand}/>
         <div className="w-full h-full dashboard__content p-2 overflow-hidden">
-            <Header />
+            <Header onClick={expandSidebar}/>
             <main className="dashboard__content__body h-[83vh] overflow-auto flex flex-wrap justify-between items-center gap-3">
                 {children}
             </main>

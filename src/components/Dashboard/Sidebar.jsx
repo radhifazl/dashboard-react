@@ -11,9 +11,9 @@ import { AiOutlineSetting } from 'react-icons/ai'
 const SidebarItem = ({ children, text, isActive, isExpanded }) => {
     return (
         <div className={` 
-            cursor-pointer mb-10
+            cursor-pointer mb-10 flex-col
             flex items-center gap-5 hover:text-primary-blue transition duration-200
-            ${isExpanded ? 'flex-row' : 'flex-col'}
+            ${isActive ? 'text-primary-blue' : 'text-white'}
         `}>
             <div className="sidebar__item-icon">
                 {children}
@@ -27,15 +27,17 @@ const SidebarItem = ({ children, text, isActive, isExpanded }) => {
     )
 }
 
-const Sidebar = () => {
+const Sidebar = ({isExpanded}) => {
   return (
-    <div className='pt-10 w-[98px] h-screen overflow-auto bg-base-component no-scrollbar'>
+    <div className={`pt-10 w-[98px] h-screen overflow-auto bg-base-component no-scrollbar
+        ${isExpanded ? 'w-[250px]' : 'w-[98px]'}
+    `}>
         <div className="logo mb-20 flex justify-center">
             <img src={DashboardLogo} alt="Logo FCC" />
         </div>
 
         <div className="sidebar__items">
-            <SidebarItem text='Dashboard'>
+            <SidebarItem text='Dashboard' isActive>
                 <RxDashboard size={30}/>
             </SidebarItem>
 
